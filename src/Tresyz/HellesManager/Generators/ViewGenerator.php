@@ -115,11 +115,15 @@ EOT;
             switch($type)
             {
                 case 'integer':
-                   $element = "{{ Form::input('number', '$name', NULL, array('class' => 'form-control')) }}";
+                    if (substr($name, -3) == '_id') {
+                      $element = "{{ Form::select('$name', array(), NULL, array('class' => 'form-control')) }}";
+                    } else {
+                      $element = "{{ Form::input('number', '$name', NULL, array('class' => 'form-control')) }}";
+                    }
                     break;
 
                 case 'text':
-                    $element = "{{ Form::textarea('$name', NULL, array('class' => 'form-control')) }}";
+                    $element = "{{ Form::textarea('$name', NULL, array('class' => 'form-control richtext')) }}";
                     break;
 
                 case 'boolean':
